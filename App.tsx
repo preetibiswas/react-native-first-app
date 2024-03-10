@@ -3,16 +3,29 @@
 /* eslint-disable prettier/prettier */
 
 import Welcome from './app/screens/Welcome';
-import ViewImageScreen from './app/screens/ViewImageScreen';
-import AppText from './app/component/AppText';
-import {View, Alert} from 'react-native';
-import AppButton from './app/component/AppButton';
+import Card from './app/component/Card';
+import {View} from 'react-native';
 
 function App() {
   console.log('preeti');
   return (
     <>
-      <Welcome />
+      {/* <Welcome /> */}
+      <View
+        style={{
+          backgroundColor: '#f8f4f4',
+          padding: 20,
+          paddingTop: 100,
+          flex: 1,
+        }}
+      >
+        <Card
+          title="Red jacket for sale"
+          subTitle="$100"
+          image={require('./app/assets/jacket.jpg')}
+        />
+      </View>
+
       {/* <ViewImageScreen /> */}
       {/* <View style={{flex: 1, backgroundColor: '#fff'}}>
         <AppText>shdfosiehfcheif</AppText>
