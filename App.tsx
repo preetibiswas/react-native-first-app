@@ -5,26 +5,20 @@
 import Welcome from './app/screens/Welcome';
 import Card from './app/component/Card';
 import {View} from 'react-native';
+import ListingDetailsScreen from './app/component/ListingDetailsScreen';
 
 function App() {
   console.log('preeti');
   return (
     <>
       {/* <Welcome /> */}
-      <View
-        style={{
-          backgroundColor: '#f8f4f4',
-          padding: 20,
-          paddingTop: 100,
-          flex: 1,
-        }}
-      >
-        <Card
+
+      {/* <Card
           title="Red jacket for sale"
           subTitle="$100"
           image={require('./app/assets/jacket.jpg')}
-        />
-      </View>
+        /> */}
+      <ListingDetailsScreen />
 
       {/* <ViewImageScreen /> */}
       {/* <View style={{flex: 1, backgroundColor: '#fff'}}>
