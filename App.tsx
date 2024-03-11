@@ -7,26 +7,29 @@ import Card from './app/component/Card';
 import {View} from 'react-native';
 import ListingDetailsScreen from './app/component/ListingDetailsScreen';
 import MessageScreen from './app/component/MessageScreen';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 function App() {
   console.log('preeti');
   return (
     <>
-      {/* <Welcome /> */}
+      <GestureHandlerRootView style={{flex: 1}}>
+        {/* <Welcome /> */}
 
-      {/* <Card
+        {/* <Card
           title="Red jacket for sale"
           subTitle="$100"
           image={require('./app/assets/jacket.jpg')}
         /> */}
-      {/* <ListingDetailsScreen /> */}
-      <MessageScreen />
+        {/* <ListingDetailsScreen /> */}
+        <MessageScreen />
 
-      {/* <ViewImageScreen /> */}
-      {/* <View style={{flex: 1, backgroundColor: '#fff'}}>
+        {/* <ViewImageScreen /> */}
+        {/* <View style={{flex: 1, backgroundColor: '#fff'}}>
         <AppText>shdfosiehfcheif</AppText>
         <AppButton title="LOgin" onPress={() => Alert.alert('hello')} />
       </View> */}
+      </GestureHandlerRootView>
     </>
   );
 }

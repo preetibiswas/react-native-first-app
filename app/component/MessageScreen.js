@@ -1,3 +1,4 @@
+/* eslint-disable react/self-closing-comp */
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import {FlatList} from 'react-native';
@@ -31,6 +32,11 @@ function MessageScreen() {
           title={item.title}
           image={item.image}
           subtitle={item.description}
+          onpress={() => console.log('nidhi')}
+          renderAction={() => (
+            // eslint-disable-next-line react-native/no-inline-styles
+            <View style={{backgroundColor: 'red', width: 70}} />
+          )}
         />
       )}
     />
