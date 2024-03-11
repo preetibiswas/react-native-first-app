@@ -6,6 +6,7 @@ import Welcome from './app/screens/Welcome';
 import Card from './app/component/Card';
 import {View} from 'react-native';
 import ListingDetailsScreen from './app/component/ListingDetailsScreen';
+import MessageScreen from './app/component/MessageScreen';
 
 function App() {
   console.log('preeti');
@@ -18,7 +19,8 @@ function App() {
           subTitle="$100"
           image={require('./app/assets/jacket.jpg')}
         /> */}
-      <ListingDetailsScreen />
+      {/* <ListingDetailsScreen /> */}
+      <MessageScreen />
 
       {/* <ViewImageScreen /> */}
       {/* <View style={{flex: 1, backgroundColor: '#fff'}}>
