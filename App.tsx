@@ -2,23 +2,24 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable prettier/prettier */
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {Picker} from '@react-native-picker/picker';
 import {Text, TextInput} from 'react-native';
 import React, {useState} from 'react';
+import AppTextInput from './app/component/AppTextInput';
 function App() {
-  const [name, setName] = useState('');
-  console;
+  const [selectedLanguage, setSelectedLanguage] = useState();
   return (
     <>
       <GestureHandlerRootView style={{flex: 1}}>
-        <Text>{name}</Text>
-        <TextInput
-          style={{borderWidth: 2}}
-          placeholder="FirstName"
-          value={name}
-          onChangeText={e => setName(e)}
-          secureTextEntry
-          clearButtonMode="always"
-        />
+        <Picker
+          selectedValue={selectedLanguage}
+          onValueChange={(itemValue, itemIndex) =>
+            setSelectedLanguage(itemValue)
+          }
+        >
+          <Picker.Item label="Java" value="java" />
+          <Picker.Item label="JavaScript" value="js" />
+        </Picker>
       </GestureHandlerRootView>
     </>
   );
