@@ -1,11 +1,12 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, {useState} from 'react';
 import {FlatList} from 'react-native';
 import ListItem from './ListItem';
 import {View} from 'react-native';
 import ListItemSeperator from './ListItemSeperator';
-const message = [
+import ListItemDeleteAction from './ListItemDeleteAction';
+const initialmessage = [
   {id: 1, title: 't1', description: 'D1', image: require('../assets/mosh.jpg')},
   {
     id: 2,
@@ -22,9 +23,25 @@ const message = [
 ];
 
 function MessageScreen() {
+  const [message, setMessage] = useState(initialmessage);
+  const [refreshing, setRefreshing] = useState(false);
+  const handleMessage = messag => {
+    setMessage(message.filter(m => m.id !== messag.id));
+  };
   return (
     <FlatList
       data={message}
+      refreshing={refreshing}
+      onRefresh={() =>
+        setMessage([
+          {
+            id: 3,
+            title: 'ti3',
+            description: 'threeen',
+            image: require('../assets/mosh.jpg'),
+          },
+        ])
+      }
       ItemSeparatorComponent={<ListItemSeperator />}
       keyExtractor={messag => messag.id.toString()}
       renderItem={({item}) => (
@@ -34,8 +51,7 @@ function MessageScreen() {
           subtitle={item.description}
           onpress={() => console.log('nidhi')}
           renderAction={() => (
-            // eslint-disable-next-line react-native/no-inline-styles
-            <View style={{backgroundColor: 'red', width: 70}} />
+            <ListItemDeleteAction onpress={() => handleMessage(item)} />
           )}
         />
       )}

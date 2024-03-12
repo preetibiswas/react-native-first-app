@@ -8,6 +8,7 @@ import {View} from 'react-native';
 import ListingDetailsScreen from './app/component/ListingDetailsScreen';
 import MessageScreen from './app/component/MessageScreen';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import AppIcon from './app/component/AppIcon';
 
 function App() {
   console.log('preeti');
@@ -22,7 +23,13 @@ function App() {
           image={require('./app/assets/jacket.jpg')}
         /> */}
         {/* <ListingDetailsScreen /> */}
-        <MessageScreen />
+        {/* <MessageScreen /> */}
+        <AppIcon
+          name="email"
+          size={45}
+          iconcolor="red"
+          backgroundcolor="black"
+        />
 
         {/* <ViewImageScreen /> */}
         {/* <View style={{flex: 1, backgroundColor: '#fff'}}>
