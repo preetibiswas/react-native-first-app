@@ -25,6 +25,7 @@ function ListItem({
     <Swipeable renderRightActions={renderAction}>
       <TouchableHighlight underlayColor={colors.light} onPress={onpress}>
         <View style={styles.container}>
+          {image && <Image style={styles.img} source={image} />}
           {ImageComponent}
           <View
             style={{marginTop: 5, marginLeft: 10, justifyContent: 'center'}}
@@ -41,12 +42,11 @@ function ListItem({
 export default ListItem;
 
 const styles = StyleSheet.create({
-  container: {flexDirection: 'row', padding: 15},
+  container: {flexDirection: 'row', padding: 15, backgroundColor: colors.white},
   img: {
     width: 70,
     height: 70,
     borderRadius: 35,
-    marginRight: 15,
   },
   title: {
     fontWeight: '500',
