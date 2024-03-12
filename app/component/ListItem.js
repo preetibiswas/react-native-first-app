@@ -13,22 +13,24 @@ import colors from '../config/colors';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function ListItem({subtitle, title, image, onpress, renderAction}) {
+function ListItem({
+  subtitle,
+  title,
+  image,
+  onpress,
+  renderAction,
+  ImageComponent,
+}) {
   return (
     <Swipeable renderRightActions={renderAction}>
       <TouchableHighlight underlayColor={colors.light} onPress={onpress}>
         <View style={styles.container}>
-          <Image source={image} style={styles.img} />
-          <View style={{marginTop: 5}}>
+          {ImageComponent}
+          <View
+            style={{marginTop: 5, marginLeft: 10, justifyContent: 'center'}}
+          >
             <AppText style={styles.title}>{title}</AppText>
-            <AppText style={styles.subtitle}>{subtitle}</AppText>
-            <Icon.Button
-              name="facebook"
-              backgroundColor="#3b5998"
-              onPress={this.loginWithFacebook}
-            >
-              Login with Facebook
-            </Icon.Button>
+            {subtitle && <AppText style={styles.subtitle}>{subtitle}</AppText>}
           </View>
         </View>
       </TouchableHighlight>

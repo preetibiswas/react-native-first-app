@@ -5,7 +5,7 @@ import React from 'react';
 import {View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-function AppIcon({name, size, iconcolor, backgroundcolor}) {
+function AppIcon({name, size = 40, iconcolor, backgroundcolor = 'pink'}) {
   return (
     <View
       style={{

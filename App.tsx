@@ -4,11 +4,12 @@
 
 import Welcome from './app/screens/Welcome';
 import Card from './app/component/Card';
-import {View} from 'react-native';
+import {Alert, View} from 'react-native';
 import ListingDetailsScreen from './app/component/ListingDetailsScreen';
 import MessageScreen from './app/component/MessageScreen';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import AppIcon from './app/component/AppIcon';
+import ListItem from './app/component/ListItem';
 
 function App() {
   console.log('preeti');
@@ -24,6 +25,11 @@ function App() {
         /> */}
         {/* <ListingDetailsScreen /> */}
         {/* <MessageScreen /> */}
+        <ListItem
+          title="Important Message"
+          onpress={() => Alert.alert('preeti')}
+          ImageComponent={<AppIcon name="home" />}
+        />
         <AppIcon
           name="email"
           size={45}
