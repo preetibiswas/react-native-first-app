@@ -6,6 +6,7 @@ import {Picker} from '@react-native-picker/picker';
 import AppPicker from './app/component/AppPicker';
 import React, {useState} from 'react';
 import PickerItem from './app/component/PickerItem';
+import LoginScreen from './app/screens/LoginScreen';
 const categories = [
   {
     label: 'Furniture',
@@ -28,13 +29,14 @@ function App() {
   return (
     <>
       <GestureHandlerRootView style={{flex: 1}}>
-        <AppPicker
+        {/* <AppPicker
           selectedItem={category}
           onSelectItem={item => setCategory(item)}
           items={categories}
           icon="apps"
           placeholder="Category"
-        />
+        /> */}
+        <LoginScreen />
       </GestureHandlerRootView>
     </>
   );
