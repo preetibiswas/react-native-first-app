@@ -7,6 +7,7 @@ import AppPicker from './app/component/AppPicker';
 import React, {useState} from 'react';
 import PickerItem from './app/component/PickerItem';
 import LoginScreen from './app/screens/LoginScreen';
+import {ListEditScreen} from './app/screens/ListEditScreen';
 const categories = [
   {
     label: 'Furniture',
@@ -36,7 +37,8 @@ function App() {
           icon="apps"
           placeholder="Category"
         /> */}
-        <LoginScreen />
+        {/* <LoginScreen /> */}
+        <ListEditScreen />
       </GestureHandlerRootView>
     </>
   );

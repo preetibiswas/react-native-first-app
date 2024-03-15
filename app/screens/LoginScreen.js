@@ -6,6 +6,10 @@ import AppTextInput from '../component/AppTextInput';
 import AppButton from '../component/AppButton';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
+import ErrorMessage from '../component/ErrorMessage';
+import AppFormField from '../component/AppFormField';
+import SubmitButton from '../component/SubmitButton';
+import AppForm from '../component/AppForm';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label('Email'),
@@ -19,22 +23,26 @@ function LoginScreen() {
       onSubmit={values => console.log(values)}
       validationSchema={validationSchema}
     >
-      {({handleChange, handleSubmit, errors}) => (
+      {({handleChange, handleSubmit, errors, setFieldTouched, touched}) => (
         <>
           <View style={styles.con}>
             <Image
               source={require('../assets/logo-red.png')}
               style={styles.logo}
             />
+
             <AppTextInput
+              onBlur={() => setFieldTouched('email')}
               autoCapitalize="none"
               icon="email"
               placeholder="Email"
               autoCorrect={false}
               onChangeText={handleChange('email')}
             />
-            <AppText style={styles.txt}>{errors.email}</AppText>
+            <ErrorMessage error={errors.email} visible={touched.email} />
+
             <AppTextInput
+              onBlur={() => setFieldTouched('password')}
               autoCapitalize="none"
               icon="lock"
               placeholder="Password"
@@ -42,8 +50,9 @@ function LoginScreen() {
               onChangeText={handleChange('password')}
               keyboardType="numeric"
             />
-            <AppText style={styles.txt}>{errors.password}</AppText>
-            <AppButton title="login" onPress={handleSubmit} />
+            <ErrorMessage error={errors.password} visible={touched.password} />
+            {/* <AppButton title="login" onPress={handleSubmit} /> */}
+            <SubmitButton title="login" />
           </View>
         </>
       )}
