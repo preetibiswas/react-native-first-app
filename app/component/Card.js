@@ -1,18 +1,26 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import {Text, View, StyleSheet, Image} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import colors from '../config/colors';
 import AppText from './AppText';
 
-function Card({title, image, subTitle}) {
+function Card({title, image, subTitle, onPress}) {
   return (
-    <View style={styles.cardCon}>
-      <Image source={image} style={styles.cardImg} />
-      <View style={styles.detailContainer}>
-        <AppText style={styles.txt}>{title}</AppText>
-        <AppText style={styles.subtxt}>{subTitle}</AppText>
+    <TouchableWithoutFeedback onPress={onPress}>
+      <View style={styles.cardCon}>
+        <Image source={{uri: image}} style={styles.cardImg} />
+        <View style={styles.detailContainer}>
+          <AppText style={styles.txt}>{title}</AppText>
+          <AppText style={styles.subtxt}>{subTitle}</AppText>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -24,10 +32,13 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     overflow: 'hidden',
     marginBottom: 15,
+    width: '100%',
+    height: 300,
   },
   cardImg: {
     width: '100%',
-    height: 200,
+    height: '70%',
+    objectFit: 'contain',
   },
   detailContainer: {
     padding: 20,

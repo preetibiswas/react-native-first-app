@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import {
@@ -12,6 +13,7 @@ import AppText from './AppText';
 import colors from '../config/colors';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 function ListItem({
   subtitle,
@@ -28,11 +30,27 @@ function ListItem({
           {image && <Image style={styles.img} source={image} />}
           {ImageComponent}
           <View
-            style={{marginTop: 5, marginLeft: 10, justifyContent: 'center'}}
+            style={{
+              marginTop: 5,
+              marginLeft: 10,
+              justifyContent: 'center',
+              flex: 1,
+            }}
           >
-            <AppText style={styles.title}>{title}</AppText>
-            {subtitle && <AppText style={styles.subtitle}>{subtitle}</AppText>}
+            <AppText style={styles.title} numberOfLines={1}>
+              {title}
+            </AppText>
+            {subtitle && (
+              <AppText style={styles.subtitle} numberOfLines={1}>
+                {subtitle}
+              </AppText>
+            )}
           </View>
+          <MaterialCommunityIcons
+            name="chevron-right"
+            color={colors.medium}
+            size={25}
+          />
         </View>
       </TouchableHighlight>
     </Swipeable>
@@ -42,7 +60,12 @@ function ListItem({
 export default ListItem;
 
 const styles = StyleSheet.create({
-  container: {flexDirection: 'row', padding: 15, backgroundColor: colors.white},
+  container: {
+    flexDirection: 'row',
+    padding: 15,
+    backgroundColor: colors.white,
+    alignItems: 'center',
+  },
   img: {
     width: 70,
     height: 70,

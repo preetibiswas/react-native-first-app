@@ -5,13 +5,14 @@ import AppText from './AppText';
 import colors from '../config/colors';
 import ListItem from './ListItem';
 
-function ListingDetailsScreen() {
+function ListingDetailsScreen({route}) {
+  const liting = route.params;
   return (
     <View>
-      <Image source={require('../assets/jacket.jpg')} style={styles.img} />
+      <Image source={{uri: liting.image}} style={styles.img} />
       <View style={styles.detailCon}>
-        <AppText style={styles.title}>Red Jacket for sell</AppText>
-        <AppText style={styles.price}>$100</AppText>
+        <AppText style={styles.title}>{liting.title}</AppText>
+        <AppText style={styles.price}>{liting.price}</AppText>
       </View>
 
       <ListItem
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
   img: {
     width: '100%',
     height: 300,
+    objectFit: 'contain',
   },
   detailCon: {
     padding: 20,
