@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, StyleSheet, Alert} from 'react-native';
 import {Formik} from 'formik';
 import AppButton from '../component/AppButton';
 import AppText from '../component/AppText';
@@ -12,6 +12,9 @@ import ImageInput from '../component/ImageInput';
 import ImageInputList from '../component/ImageInputList';
 import FormImagePicker from '../component/FormImagePicker';
 import ActiveIndicator from '../component/ActiveIndicator';
+import listingApi from '../api/listing';
+import axios from 'axios';
+import UploadScreen from './UploadScreen';
 
 const categories = [
   {label: 'Furniture', value: 1},
@@ -24,10 +27,46 @@ const validationSchema = Yup.object().shape({
   price: Yup.number().required().min(1).max(10000).label('Price'),
   description: Yup.string().required().label('Description'),
   category: Yup.object().required().nullable().label('Category'),
-  // images: Yup.array().min(1, 'Please select atleat one image'),
+  images: Yup.array().min(1, 'Please select atleat one image'),
 });
 
 const ListEditScreen = props => {
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  const handleSubmit = async (listing, {resetForm}) => {
+    console.log(listing);
+    setProgress(0);
+    setUploadVisible(true);
+    try {
+      const response = await axios.post(
+        'https://fakestoreapi.com/products',
+        {
+          title: listing.title,
+          price: listing.price,
+          description: listing.description,
+          image: listing.images,
+          category: listing.category.label,
+        },
+        {
+          onUploadProgress: progressEvent => {
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total,
+            );
+            setProgress(percentCompleted);
+            console.log(`Upload Progress: ${percentCompleted}%`);
+          },
+        },
+      );
+      resetForm();
+
+      console.log('preeti bisaea', response.data);
+      Alert.alert('success');
+    } catch (error) {
+      setUploadVisible(false);
+      Alert.alert('Error', error);
+    }
+  };
   return (
     <Formik
       initialValues={{
@@ -37,7 +76,7 @@ const ListEditScreen = props => {
         description: '',
         images: [],
       }}
-      onSubmit={values => console.log('preeti', values)}
+      onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
       {({
@@ -48,25 +87,34 @@ const ListEditScreen = props => {
         touched,
         setFieldValue,
         value,
+        values,
       }) => (
         <>
           <View style={styles.con}>
             <ActiveIndicator visible={true} />
+            <UploadScreen
+              progress={progress}
+              visible={uploadVisible}
+              onDone={() => setUploadVisible(false)}
+            />
             <FormImagePicker name="images" />
             <ErrorMessage error={errors.images} visible={touched.title} />
             <AppTextInput
               maxLength={255}
               placeholder="Title"
-              onChangeText={handleChange('title')}
+              onChangeText={txt => setFieldValue('title', txt)}
               onBlur={() => setFieldTouched('title')}
               autoCapitalize="none"
+              value={values.title}
             />
             <ErrorMessage error={errors.title} visible={touched.title} />
             <AppTextInput
               keyboardType="numeric"
               maxLength={8}
+              value={values.price}
               placeholder="Price"
-              onChangeText={handleChange('price')}
+              onChangeText={txt => setFieldValue('price', txt)}
+              // onChangeText={handleChange('price')}
               onBlur={() => setFieldTouched('price')}
               autoCapitalize="none"
             />
@@ -82,7 +130,8 @@ const ListEditScreen = props => {
               multiline
               numberOfLines={3}
               placeholder="Description"
-              onChangeText={handleChange('description')}
+              onChangeText={txt => setFieldValue('description', txt)}
+              value={values.description}
               onBlur={() => setFieldTouched('description')}
               autoCapitalize="none"
             />

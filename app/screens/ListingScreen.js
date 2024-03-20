@@ -57,7 +57,7 @@ function ListingScreen({navigation}) {
       {error && (
         <>
           <AppText>could't retrive the listing </AppText>
-          <AppButton title="Retry" onPress={listing} />
+          <AppButton title="Retry" onPress={loadlist} />
         </>
       )}
       <FlatList
